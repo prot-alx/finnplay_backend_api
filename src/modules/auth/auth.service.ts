@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { UsersService } from '../users/users.service';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -27,5 +28,27 @@ export class AuthService {
       sameSite: 'strict',
       maxAge: 3600000, // 1 час
     });
+  }
+
+  async check(token: string): Promise<boolean> {
+    try {
+      const payload = await this.jwtService.verifyAsync<JwtPayload>(token);
+      const user = await this.usersService.findOne(payload.username);
+      if (!user) {
+        throw new UnauthorizedException();
+      }
+      return true;
+    } catch {
+      throw new UnauthorizedException();
+    }
+  }
+
+  async logout(res: Response): Promise<void> {
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+    });
+    return Promise.resolve();
   }
 }

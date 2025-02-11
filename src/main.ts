@@ -6,40 +6,37 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
+  // константа для начального таймера времени запуска приложения
   const start = Date.now();
 
-  const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
-
-  app.useGlobalPipes(new ValidationPipe());
-  app.use(cookieParser());
-
-  // добавим базовый swagger
-  const config = new DocumentBuilder()
-    .setTitle('Finnplay API')
-    .setDescription('Brainex test task')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-
-  app.enableCors({
-    // из .env или react дефолт http://localhost:3333 в соответствии с файлом конфигурации
-    origin: [configService.get<string>('frontendUrl')],
-    credentials: true,
-    // можно добавить остальные методы, но в данном задании они не нужны ('PUT', 'DELETE', 'OPTIONS')
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  });
-
-  // из .env или 3000 в соответствии с файлом конфигурации
-  const port = configService.get<number>('port');
   try {
-    await app.listen(port ?? 3000);
+    const app = await NestFactory.create(AppModule);
+    const configService = app.get(ConfigService);
 
-    const end = Date.now();
-    const elapsed = end - start;
+    app.useGlobalPipes(new ValidationPipe());
+    app.use(cookieParser());
 
+    // базовый конфиг swagger
+    const config = new DocumentBuilder()
+      .setTitle('Finnplay API')
+      .setDescription('Brainex test task')
+      .setVersion('1.0')
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+
+    // можно добавить остальные методы, но в данном задании они не нужны ('PUT', 'DELETE', 'OPTIONS')
+    app.enableCors({
+      origin: [configService.get<string>('frontendUrl')],
+      credentials: true,
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    });
+
+    const port = configService.get<number>('port') ?? 3000;
+    await app.listen(port);
+
+    const elapsed = Date.now() - start;
     console.log(
       `🚀 Server running on http://localhost:${port} (started in ${elapsed}ms)`,
     );
@@ -47,5 +44,5 @@ async function bootstrap() {
     console.error('❌ Error starting the application:', error);
   }
 }
-
-bootstrap();
+// добавил void, даем понять линтеру, что нам не важен результат выполнения функции, т.к. мы обрабатываем ошибки выше
+void bootstrap();

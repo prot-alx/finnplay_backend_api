@@ -1,12 +1,11 @@
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { Controller, Get, UseGuards } from '@nestjs/common';
 import { GamesService } from './games.service';
-
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { GameDataDto } from './dto/game-data.dto';
 

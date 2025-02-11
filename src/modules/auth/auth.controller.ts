@@ -1,4 +1,3 @@
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -8,6 +7,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 

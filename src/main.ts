@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as session from 'express-session';
 import * as cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -14,16 +13,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
-  app.use(
-    session({
-      secret:
-        configService.get<string>('jwtSecret') ?? 'jwt_secret_key_reserve',
-      resave: false,
-      saveUninitialized: false,
-      cookie: { secure: false },
-      // в реальном случае cookie secure должно быть true для https
-    }),
-  );
 
   // добавим базовый swagger
   const config = new DocumentBuilder()

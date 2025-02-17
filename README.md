@@ -4,7 +4,6 @@ git clone https://github.com/prot-alx/finnplay_backend_api
 ```
 
 ## Project setup
-
 ```bash
 npm install
 ```
@@ -19,28 +18,32 @@ npm install
 
 ## Compile and run the project
 
+### development
 ```bash
-# development
 npm run start
+```
 
-# watch mode
+### watch mode
+```bash
 npm run start:dev
+```
 
-# production mode
+### production mode
+```bash
 npm run start:prod
 ```
 
 ## Using Docker Compose
-
+### Start the application
 ```bash
-# Start the application
 docker compose up -d
-
-# View logs
+```
+### View logs
+```bash
 docker compose logs -f
-
-# Stop the application
-docker compose down
 ```
 
-The API runs on port 3000 by default.
+### Stop the application
+```bash
+docker compose down
+```

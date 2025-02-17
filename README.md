@@ -47,3 +47,8 @@ docker compose logs -f
 ```bash
 docker compose down
 ```
+
+## Swagger
+### The API documentation is available at the following URL:
+- **Local:** [`http://localhost:3000/api`](http://localhost:3000/api)
+- **Production:** `<your_server_address>/api`

@@ -27,10 +27,7 @@ async function bootstrap() {
 
     // можно добавить остальные методы, но в данном задании они не нужны ('PUT', 'DELETE', 'OPTIONS')
     app.enableCors({
-      origin: [
-        configService.get<string>('frontendUrl'),
-        'http://localhost:4173',
-      ],
+      origin: configService.get<string[]>('frontendApiUrl'),
       credentials: true,
       methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],

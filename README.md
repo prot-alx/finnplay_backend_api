@@ -1,4 +1,4 @@
-## Project install =
+## Project install
 ```bash
 git clone https://github.com/prot-alx/finnplay_backend_api
 ```

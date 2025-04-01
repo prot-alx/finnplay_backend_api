@@ -15,6 +15,7 @@ npm install
 - Frontend API repository: https://github.com/prot-alx/finnplay_react_api
 - Backend API: localhost:3000
 - CORS is enabled for localhost:5173 and localhost:4173 by default
+- Additional Frontend API (class components + mobx): https://github.com/prot-alx/finnplay_test_task_2
 
 ## Compile and run the project
 

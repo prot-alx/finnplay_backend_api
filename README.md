@@ -53,3 +53,16 @@ docker compose down
 ### The API documentation is available at the following URL:
 - **Local:** [`http://localhost:3000/api`](http://localhost:3000/api)
 - **Production:** `<your_server_address>/api`
+
+
+### Mock user 1:
+```plaintext
+login: player1
+password: player1
+```
+
+### Mock user 2:
+```plaintext
+login: player2
+password: player2
+```
